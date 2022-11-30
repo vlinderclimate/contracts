@@ -1,6 +1,6 @@
 import { task, types } from 'hardhat/config';
 
-// hardhat deploy-forward --network matic --name "<name>" --symbol "<symbol>" --settlement "0"
+// hardhat deploy-forward --network matic --name "<name>" --symbol "<symbol>" --settlement <unix>
 
 task('deploy-forward', 'Deploys vlider forward token')
   .addParam('name', 'Token name')

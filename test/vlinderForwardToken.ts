@@ -72,6 +72,21 @@ describe('Vlinder Forward token', function () {
       ).to.be.revertedWith('ERC20: burn amount exceeds balance');
     });
 
+    it('CO2 claim should emit event', async function () {
+      const { erc20token, vlinderForwardToken, account1 } = await loadFixture(
+        deployTokensFixture(1000, await time.latest())
+      );
+
+      await vlinderForwardToken.transfer(account1.address, 1000);
+      await erc20token.transfer(vlinderForwardToken.address, 1000);
+
+      await expect(
+        vlinderForwardToken.connect(account1).claim(erc20token.address, 1000)
+      )
+        .to.emit(vlinderForwardToken, 'Claim(address,address,uint256)')
+        .withArgs(account1.address, erc20token.address, 1000);
+    });
+
     it('CO2 can be claimed if total supply is equal to CO2 balance', async function () {
       const forwardTotalSupply = 3500;
 

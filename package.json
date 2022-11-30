@@ -4,8 +4,8 @@
   "scripts": {
     "test": "hardhat test --network hardhat",
     "compile": "hardhat compile",
-    "deploy-forward": "hardhat deploy-forward --network matic --",
-    "verify-token": "hardhat verify --network matic --"
+    "deploy-forward": "hardhat deploy-forward --network matic",
+    "verify": "hardhat verify --network matic"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
