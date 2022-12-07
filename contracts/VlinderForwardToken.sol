@@ -19,6 +19,7 @@ contract VlinderForwardToken is
 {
     event Claim(address indexed from, address indexed token, uint256 amount);
 
+    string private _description;
     uint256 private _settlementDate;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -29,6 +30,7 @@ contract VlinderForwardToken is
     function initialize(
         string memory name,
         string memory symbol,
+        string memory description_,
         uint256 settlementDate_
     ) public initializer {
         __ERC20_init(name, symbol);
@@ -37,14 +39,19 @@ contract VlinderForwardToken is
         __Ownable_init();
         __UUPSUpgradeable_init();
 
+        _description = description_;
         _settlementDate = settlementDate_;
     }
 
-    function settlementDate() public view returns (uint256) {
+    function description() public view virtual returns (string memory) {
+        return _description;
+    }
+
+    function settlementDate() public view virtual returns (uint256) {
         return _settlementDate;
     }
 
-    function claim(address token, uint256 amount) public {
+    function claim(address token, uint256 amount) public virtual {
         require(
             _settlementDate <= block.timestamp,
             "Settlement date is not yet reached"

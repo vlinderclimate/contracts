@@ -23,7 +23,7 @@ describe('Vlinder Forward token', function () {
       );
       const vlinderForwardToken = (await upgrades.deployProxy(
         VlinderForwardToken,
-        ['Vlinder Forward Token', 'XXX', settlementDate]
+        ['Vlinder Forward Token', 'XXX', 'description', settlementDate]
       )) as VlinderForwardToken;
 
       await vlinderForwardToken.deployed();
